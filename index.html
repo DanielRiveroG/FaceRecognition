@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+	<body onload="mueveReloj()">
+    <div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2 id="greeting" class="greeting">Welcome to SmartVilla</h2>
+				</div>
+			</div>
+      <div class="row">
+				<div class="col-sm-3">
+						<div id="msgpanel" class="panel panel-default msgpanel">
+							<div class="panel-heading custhead">
+								<img id="senderimg" src="retrato.jpg" class="msgimg">
+								<span id="sender" class="sender">Message from: Alexander</span>
+							</div>
+							<div class="panel-body">
+								<span id="message" class="message">Start building home automation.</span>
+							</div>
+						</div>
+				</div>
+        <div class="col-sm-6 maincol">
+          <div class="center-div">
+            <span><div id="container-ios9" class="center-div">
+                <div class="center-div" id="container-ios9-canvas"></div>
+            </div></span>
+          </div>
+          <img id="image" src="retrato.jpg" class="center-img hide" alt="">
+          <script src="siriwave.js"></script>
+          <script>
+            var SW9 = new SiriWave({
+              amplitude: 1,
+              container: document.getElementById('container-ios9-canvas'),
+              autostart: true,
+              style: 'ios9',
+              speed: 0.03,
+            });
+          </script>
+        </div>
+				<div class="col-sm-3">
+					<div id="info" class="panel panel-default infopanel">
+						<div class="panel-heading custhead">
+							<span class="tittle"><b>SmartVilla Info</b></span>
+						</div>
+						<div class="panel-body bodyinfo">
+							<div class="info content_temperature"><img class="icon" src="icons/temperature.svg" alt=""/>Temperature: 24ºC<br/></div>
+							<div class="info content_humidity"><img class="icon" src="icons/drop.svg" alt=""/>Humidity: 65%<br/></div>
+							<div class="info content_airq"><img class="icon" src="icons/houseplant.svg" alt=""/>Air Quality: Good<br/></div>
+							<div class="info content_internet"><img class="icon" src="icons/router.svg" alt=""/>Internet: Connected<br/></div>
+							<div class="info content_alarm"><img class="icon" src="icons/alarm.svg" alt=""/>Alarm: Disabled<br/></div>
+							<div class="info content_power_consumption"><img class="icon" src="icons/power.svg" alt=""/>Power consumption: 5.78kW<br/></div>
+						</div>
+					</div>
+      	</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+
+				</div>
+				<div class="col-sm-6">
+					<script language="JavaScript">
+					function mueveReloj(){
+					    now = new Date()
+					    hour = now.getHours()
+					    minute = now.getMinutes()
+					    second = now.getSeconds()
+							day = now.getDay()
+							month = now.getMonth()
+							year = now.getFullYear()
+							dayOfMonth = now.getDate()
+							var days = ['Sunday','Monday','Tuesday','Wednesay','Thursday','Friday','Saturday']
+							var months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+							str_day = days[day]
+							str_month = months[month]
+
+							str_second = new String (second)
+    					if (str_second.length == 1)
+       				second = "0" + second
+
+    					str_minute = new String (minute)
+    					if (str_minute.length == 1)
+       				minute = "0" + minute
+
+    					str_hour = new String (hour)
+    					if (str_hour.length == 1)
+       				hour = "0" + hour
+
+					    completeHour = hour + " : " + minute + " : " + second
+							completeDate = str_day + ", " + str_month + " " + dayOfMonth + ", " + year
+
+							document.getElementById('hour').innerHTML = completeHour
+							document.getElementById('date').innerHTML = completeDate
+
+					    setTimeout("mueveReloj()",1000)
+					}
+					</script>
+					<div class="clock">
+						<span id="hour"></span>
+						<br/>
+						<span id="date"></span>
+					</div>
+
+				</div>
+				<div class="col-sm-3">
+				</div>
+    </div>
+	</body>
+	<script>
+		require('./renderer.js')
+	</script>
+	<script>
+		window.$ = window.jQuery = require("./js/jquery-1.11.1.min.js")
+	</script>
+	</html>

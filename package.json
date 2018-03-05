@@ -1,0 +1,16 @@
+{
+  "name": "pretty-calculator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "mongodb": "^3.0.1",
+    "zerorpc": "git+https://github.com/fyears/zerorpc-node.git"
+  },
+  "devDependencies": {
+    "electron": "^1.7.6",
+    "electron-packager": "^9.0.1",
+    "electron-rebuild": "^1.7.3"
+  }
+}

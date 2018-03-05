@@ -1,0 +1,93 @@
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#538478), to(#2B2D4C)) fixed;
+
+}
+.center-div
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background-color: #fef8d4;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fef8d4;
+}
+.center-img
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+.maincol{
+  padding-top: 20%;
+}
+.greeting{
+  text-align: center;
+  font-size: 3em;
+  color: #fef8d4;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  font-family: open sans;
+}
+.msgimg{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.hide {
+  display:none;
+}
+
+.panel.panel-default.msgpanel{
+  width: 300px;
+  height: 250px;
+  margin-top: 10%;
+  padding-bottom: 10%;
+  background: rgba(254, 248, 212, 0.3);
+  border: none;
+}
+.panel.panel-default.infopanel{
+  background: rgba(254, 248, 212, 0.3);
+  border: none;
+}
+.custhead{
+  font-weight: bold;
+  font-family: open sans;
+}
+.panel-body{
+  font-family: open sans;
+  color: #fef8d4;
+}
+.clock {
+  text-align: center;
+  font-family: open sans;
+  color: #fef8d4;
+  margin-top: 10%;
+}
+
+#hour{
+  font-size: 3em;
+}
+
+.carousel-indicators.custind li {
+    background-color: grey;
+}
+
+.info{
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+.icon{
+  margin-right: 4%;
+}
