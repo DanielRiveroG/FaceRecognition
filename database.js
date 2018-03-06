@@ -6,14 +6,6 @@ function getUser(query){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("recognition");
-            /* Update one user
-                var myquery = { name: "Roberto Diaz" };
-            var newvalues = { $set: {job_position: "trainee"}};
-            dbo.collection("users").updateOne(myquery, newvalues, function(err, res) {
-                if (err) throw err;
-                console.log("1 document updated");
-                db.close();
-            });*/
             dbo.collection("users").findOne(query, (err, res) => {
                 if (err) reject(err);
                 console.log(res);
@@ -29,20 +21,26 @@ function getMessages(query){
         MongoClient.connect(url, function(err, db) {
             if (err) throw err;
             var dbo = db.db("recognition");
-            /* Update one user
-                var myquery = { name: "Roberto Diaz" };
-            var newvalues = { $set: {job_position: "trainee"}};
-            dbo.collection("users").updateOne(myquery, newvalues, function(err, res) {
-                if (err) throw err;
-                console.log("1 document updated");
-                db.close();
-            });*/
-            dbo.collection("messages").findOne(query, (err, res) => {
+            dbo.collection("messages").find(query).toArray(function(err, res) {
                 if (err) reject(err);
                 console.log(res);
                 db.close();
                 fulfill(res);
             })
+        });
+    })
+}
+
+function deleteMessage(query){
+    return new Promise(function(fulfill, reject){
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("recognition");
+            dbo.collection("messages").remove({_id : query}, function(err, res) {
+                if (err) throw err;
+                console.log("1 message deleted");
+                db.close();
+            });
         });
     })
 }
@@ -94,3 +92,4 @@ module.exports.insertUser = insertUser;
 module.exports.insertManyUsers = insertManyUsers;
 module.exports.updateUser = updateUser;
 module.exports.getMessages = getMessages;
+module.exports.deleteMessage = deleteMessage;

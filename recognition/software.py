@@ -2,7 +2,7 @@ import face_recognition
 import cv2
 from os import walk
 
-known_people_path = "/home/daniel/face_recognition/recognition/known_people/"
+known_people_path = "/home/daniel/FaceRecognition/recognition/known_people/"
 files = []
 for (dirpath, dirnames, filenames) in walk(known_people_path):
     files.extend(filenames)
@@ -29,7 +29,7 @@ print(peoples_names)
 # Load a sample picture and learn how to recognize it.
 images = []
 for filename in files:
-    images.append(face_recognition.load_image_file("/home/daniel/face_recognition/recognition/known_people/" + filename))
+    images.append(face_recognition.load_image_file("/home/daniel/FaceRecognition/recognition/known_people/" + filename))
 face_encodings_array = []
 for image in images:
     face_encodings_array.append(face_recognition.face_encodings(image)[0])

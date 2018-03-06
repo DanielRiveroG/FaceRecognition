@@ -91,3 +91,12 @@ body {
 .icon{
   margin-right: 4%;
 }
+
+.msgLeft {
+  text-align: center;
+  margin-left: 10%;
+}
+
+#msgLeft {
+  color: #fef8d4;
+}

@@ -1,5 +1,6 @@
 const zerorpc = require("zerorpc");
 const database = require('./database');
+const messages = require('./messages')
 let client = new zerorpc.Client({
   timeout: 360,
   heartbeatInterval: 360000
@@ -13,6 +14,7 @@ let carousel = document.getElementById('msgpanel');
 let sender = document.getElementById('sender');
 let message = document.getElementById('message');
 let senderimg = document.getElementById('senderimg');
+let msgLeft = document.getElementById('msgLeft');
 //image.classList.remove('hide');
 let found = false;
 let connectionError = false;
@@ -54,6 +56,7 @@ const connect = () => {
             circle.classList.remove('hide');
             info.classList.add('hide');
             carousel.classList.add('hide');
+            msgLeft.classList.add('hide');
             found = true;
             clearInterval(timervar);
             timer(1000);
@@ -63,6 +66,7 @@ const connect = () => {
             circle.classList.remove('hide');
             info.classList.add('hide');
             carousel.classList.add('hide');
+            msgLeft.classList.add('hide');
             found = true;
             clearInterval(timervar);
             timer(5000);
@@ -79,11 +83,8 @@ const connect = () => {
               image.classList.remove('hide');
               carousel.classList.remove('hide');
               found = true;
-              database.getMessages({to : res}).then(data =>{
-                sender.innerHTML = "Message from: " + data.from;
-                message.innerHTML = data.message;
-                senderimg.src = "recognition/known_people/" + data.from + ".jpg";
-              });
+              messages.putMessage(sender, message, senderimg, res);
+              //messages.getMessagesNumber({to : res});
               clearInterval(timervar);
               timer(10000);
             });
