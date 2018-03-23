@@ -1,57 +1,39 @@
 import face_recognition
 import cv2
 from os import walk
+import dropbox
 
-known_people_path = "/home/daniel/FaceRecognition/recognition/known_people/"
-files = []
-for (dirpath, dirnames, filenames) in walk(known_people_path):
-    files.extend(filenames)
-    break
-print(files)
+def updateFiles():
+    known_people_path = "/home/daniel/Dropbox/Aplicaciones/SmartVilla/"
 
-peoples_names = []
-for names in files:
-    peoples_names.append(names.split(".j")[0])
-print(peoples_names)
+    files = []
+    for (dirpath, dirnames, filenames) in walk(known_people_path):
+        files.extend(filenames)
+        break
 
-# This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
-# other example, but it includes some basic performance tweaks to make things run a lot faster:
-#   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
-#   2. Only detect faces in every other frame of video.
+    files.remove(".dropbox")
+    print(files)
+    peoples_names = []
+    for names in files:
+        peoples_names.append(names.split(".j")[0])
+    print(peoples_names)
+    images = []
+    for filename in files:
+        print(filename)
+        images.append(face_recognition.load_image_file("/home/daniel/Dropbox/Aplicaciones/SmartVilla/" + filename))
+    face_encodings_array = []
+    for image in images:
+        face_encodings_array.append(face_recognition.face_encodings(image)[0])
 
-# PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
-# OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
-# specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
-
-# Get a reference to webcam #0 (the default one)
-#video_capture = cv2.VideoCapture(0)
-
-# Load a sample picture and learn how to recognize it.
-images = []
-for filename in files:
-    images.append(face_recognition.load_image_file("/home/daniel/FaceRecognition/recognition/known_people/" + filename))
-face_encodings_array = []
-for image in images:
-    face_encodings_array.append(face_recognition.face_encodings(image)[0])
-
+    return peoples_names, face_encodings_array
 def find():
+    #if repeat == 1:
+    #    peoples_names, face_encodings_array = updateFiles()
+    peoples_names, face_encodings_array = updateFiles()
     # Initialize some variables
     face_locations = []
     face_encodings = []
     face_names = []
-
-    # This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
-    # other example, but it includes some basic performance tweaks to make things run a lot faster:
-    #   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
-    #   2. Only detect faces in every other frame of video.
-
-    # PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
-    # OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
-    # specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
-
-    # Get a reference to webcam #0 (the default one)
-
-
     process_this_frame = True
     video_capture = cv2.VideoCapture(1)
 

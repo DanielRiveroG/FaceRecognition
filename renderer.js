@@ -11,9 +11,6 @@ let circle = document.getElementById('container-ios9');
 let image = document.getElementById('image');
 let info = document.getElementById('info');
 let carousel = document.getElementById('msgpanel');
-let sender = document.getElementById('sender');
-let message = document.getElementById('message');
-let senderimg = document.getElementById('senderimg');
 let msgLeft = document.getElementById('msgLeft');
 //image.classList.remove('hide');
 let found = false;
@@ -59,9 +56,9 @@ const connect = () => {
             msgLeft.classList.add('hide');
             found = true;
             clearInterval(timervar);
-            timer(1000);
+            timer(250);
           } else if(res==="Unknown"){
-            greeting.textContent = "Fuera de aqui basurilla que no te conozco";
+            greeting.textContent = "Sorry, I can't recognize you";
             image.classList.add('hide');
             circle.classList.remove('hide');
             info.classList.add('hide');
@@ -75,16 +72,15 @@ const connect = () => {
             console.log(res);
             let split = res.split(" ");
             database.getUser({name: split[0], surname: split[1]}).then(data => {
-              (!data.last_visit)? greeting.textContent = "Welcome to you first visit to Smart Villa, " + res : greeting.textContent = "Welcome again, " + split[0]+" "+split[1];
+              (data.last_visit == 0)? greeting.textContent = "Welcome to you first visit to Smart Villa, " + res : greeting.textContent = "Welcome again, " + split[0]+" "+split[1];
               database.updateUser({name: data.name, surname: data.surname}, { $set: {last_visit: (new Date()).getTime()}});
-              image.src="recognition/known_people/"+split[0]+" "+split[1]+".jpg";
+              image.src="/home/daniel/Dropbox/Aplicaciones/SmartVilla/"+split[0]+" "+split[1]+".jpg";
               circle.classList.add('hide');
               info.classList.remove('hide');
               image.classList.remove('hide');
               carousel.classList.remove('hide');
               found = true;
-              messages.putMessage(sender, message, senderimg, res);
-              //messages.getMessagesNumber({to : res});
+              messages.putMessage(res);
               clearInterval(timervar);
               timer(10000);
             });

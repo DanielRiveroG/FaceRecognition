@@ -1,12 +1,15 @@
 const database = require('./database');
 
 var msgLeft = document.getElementById("msgLeft");
+let sender = document.getElementById('sender');
+let message = document.getElementById('message');
+let senderimg = document.getElementById('senderimg');
 
-function putMessage(sender, message, senderimg, res){
+function putMessage(res){
   database.getMessages({to : res}).then(data =>{
     if(data.length != 0){
         var i = 0;
-        auxiliar(sender, message, senderimg, data, i);
+        auxiliar(data, i);
     }else{
       sender.innerHTML = "You have no messages";
       message.innerHTML = "";
@@ -16,7 +19,7 @@ function putMessage(sender, message, senderimg, res){
   });
 }
 
-function auxiliar(sender, message, senderimg, data, i) {
+function auxiliar(data, i) {
   var element = data[i];
   sender.innerHTML = "Message from: " + element.from;
   message.innerHTML = element.message;
@@ -27,7 +30,7 @@ function auxiliar(sender, message, senderimg, data, i) {
   database.deleteMessage(element._id);
   setTimeout(function () {
     if (++i < data.length) {
-      auxiliar(sender, message, senderimg, data, i);
+      auxiliar(data, i);
     }
   }, 4000);
 }

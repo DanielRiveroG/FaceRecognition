@@ -1,6 +1,6 @@
 from os import walk
 
-mypath = "known_people"
+mypath = "/home/daniel/Dropbox/Aplicaciones/SmartVilla/"
 f = []
 for (dirpath, dirnames, filenames) in walk(mypath):
     f.extend(filenames)

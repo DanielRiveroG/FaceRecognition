@@ -1,17 +1,31 @@
 from __future__ import print_function
 import sys
 import zerorpc
+import serial, time
 from software import find as real_find
+from software import updateFiles
 import gevent
 
 class CalcApi(object):
     def find(self):
-        found = findPerson()
-        print(found)
-        while not found:
-            print("error")
+        arduino = serial.Serial("/dev/ttyACM0", 9600);
+        time.sleep(2);
+        arduino.write("a");
+        if arduino.read() == "s" :
+            print("he visto algo")
             found = findPerson()
-        return found
+            print(found)
+            while not found:
+                print("error")
+                found = findPerson()
+            #if found == "Unknown":
+            #    found = findPerson()
+            arduino.close()
+            return found
+        else :
+            print("no he visto na")
+            arduino.close()
+            return "NoOne"
 
     def echo(self, text):
         """echo any text"""
